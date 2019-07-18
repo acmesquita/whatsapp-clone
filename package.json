@@ -19,8 +19,9 @@
   },
   "homepage": "https://github.com/acmesquita/whatsapp-clone#readme",
   "dependencies": {
+    "pdfjs-dist": "^2.1.266",
     "webpack": "^3.1.0",
-    "webpack-dev-server": "^2.5.1",
-    "webpack-cli": "^2.0.9"
+    "webpack-cli": "^2.0.9",
+    "webpack-dev-server": "^2.5.1"
   }
 }
