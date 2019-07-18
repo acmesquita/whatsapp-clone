@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/acmesquita/whatsapp-clone#readme",
   "dependencies": {
+    "firebase": "^6.3.0",
     "pdfjs-dist": "^2.1.266",
     "webpack": "^3.1.0",
     "webpack-cli": "^2.0.9",
