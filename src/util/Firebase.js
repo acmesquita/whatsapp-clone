@@ -16,12 +16,12 @@ export class Firebase{
     }
     
     init(){
-        if(!this._initialized){
+        if(!window._initializedFirebase){
             firebase.initializeApp(this._config);
 
             firebase.firestore().settings({})
 
-            this._initialized = true;
+            window._initializedFirebase = true;
         }
     }
 
@@ -35,7 +35,7 @@ export class Firebase{
             firebase.auth().signInWithPopup(provider)
             .then(result=>{
                 let token = result.credential.accessToken;
-                let user = resolve.user;
+                let user = result.user;
                 resolve({user, token})
             })
             .catch(err=> reject(err))
