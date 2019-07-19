@@ -549,23 +549,41 @@ export class WhatsAppController{
         this.el.main.css({
             display: 'flex'
         })
+        this.el.panelMessagesContainer.innerHTML = ''
+        
         // Mensagens do chat ordenadas pela mais recente
         Message.getRef(this._contactActive.chatId).orderBy('timeStamp')
         .onSnapshot(docs=>{
-            this.el.panelMessagesContainer.innerHTML = ''
+            
+            let scrollTop = this.el.panelMessagesContainer.scrollTop;
+            let scrollTopMax = (this.el.panelMessagesContainer.scrollHeight - this.el.panelMessagesContainer.offsetHeight);
+            let autoScroll = (scrollTop >= scrollTopMax)
 
             docs.forEach(doc => {
                 let data = doc.data()
                 data.id = doc.id
                 if (!this.el.panelMessagesContainer.querySelector('#_'+data.id)){
+                    
+
                     let message = new Message()
                     message.fromJSON(data);
                     let me = (data.from === this._user.email)
                     let view = message.getViewElement(me);
                     this.el.panelMessagesContainer.appendChild(view);
-                }
 
+                    
+                }
+                
             })
+            if(autoScroll){
+    
+                this.el.panelMessagesContainer.scrollTop = 
+                (this.el.panelMessagesContainer.scrollHeight - 
+                this.el.panelMessagesContainer.offsetHeight);
+            }
+            else{
+                this.el.panelMessagesContainer.scrollTop = scrollTop;
+            }
         })
     }
 }
