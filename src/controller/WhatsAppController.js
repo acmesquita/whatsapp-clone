@@ -291,7 +291,7 @@ export class WhatsAppController{
 
         this.el.inputPhoto.on('change', e => {
             [...this.el.inputPhoto.files].forEach(file => {
-                console.log(file)
+                Message.sendImage(this._contactActive.chatId, this._user.email, file)
             });  
         })
 
