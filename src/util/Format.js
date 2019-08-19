@@ -7,15 +7,21 @@ export class Format{
     }
     
     static toTime(duration){
-        let seconds = parseInt((duration / 1000) % 60);
-        let minutes = parseInt((duration / 1000 * 60) % 60);
-        let hours = parseInt((duration / 1000 * 60 * 60) % 60);
+        let seconds = parseInt((duration / 1000));
+        if(parseInt(seconds / 60 / 60) > 0){
+            return [
+                parseInt(seconds / 60 / 60),
+                parseInt(seconds / 60 % 60),
+                parseInt(seconds % 60).toString().padStart(2, '0')
+            ].join(":")
 
-        if(hours > 0){
-           return `${hours}:${minutes}:${seconds.toString().padStart(2, '0')}` 
         }else{
-           return `${minutes}:${seconds.toString().padStart(2, '0')}` 
+            return [
+                parseInt(seconds / 60 % 60),
+                parseInt(seconds % 60).toString().padStart(2, '0')
+            ].join(":")
         }
+
     }
 
     static timeStampToTime(timeStamp){

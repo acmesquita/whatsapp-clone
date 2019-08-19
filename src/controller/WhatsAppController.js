@@ -510,6 +510,15 @@ export class WhatsAppController{
         })
 
         this.el.btnFinishMicrophone.on('click', e => {
+            this._microphoneController.on('recorded', (file, e)=> {
+                Message.sendAudio(
+                    this._contactActive.chatId,
+                    this._user.email,
+                    file,
+                    e,
+                    this._user.photo
+                );
+            })
             this._microphoneController.stopRecorder()
             this.closeRecordMicrophone()
         })
